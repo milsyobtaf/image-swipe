@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Image Swipe</title>
+	<style type="text/css" media="screen">
+		#theImageSwipe { position:relative; display:block; }
+		input[type=range] { }
+	</style>
+</head>
+<body>
+	<div id="theImageSwipe"></div>
+
+	<!-- <div id="theImageSwipe">
+		<span id="is_imageOne">
+			<img src="eu.jpg" alt="eu um">
+		</span>
+		<span id="is_imageTwo">
+			<img src="http://a1.twimg.com/profile_images/1300039817/eu.jpg" alt="eu dois">
+		</span>
+	</div>
+	<input type="range" name="slider" id="slider" min="0" max="300" value="150"> -->
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+	$(document).ready(function(){
+			swipeThis('theImageSwipe', 970, 500, 'antes.jpg', 'depois.jpg');
+
+			function swipeThis(e, w, h, i1, i2){
+				var wrapper = document.getElementById(e);
+				    wrapper.style.position = 'relative';
+				    wrapper.style.display = 'block';
+				    wrapper.style.width = w + 'px';
+				    wrapper.style.height = h + 'px';
+
+				var image1 = new Image();
+				    image1.src = i1;
+
+				var image2 = new Image();
+				    image2.src = i2;
+
+				var span1 = document.createElement('span');
+				    span1.id = 'is_imageOne';
+				    span1.style.position = 'absolute';
+				    span1.style.width = w + 'px';
+				    span1.style.height = h + 'px';
+				    span1.style.top = '0';
+				    span1.style.left = '0';
+				    span1.style.overflow = 'hidden';
+				    span1.style.zIndex = '1';
+		    $(wrapper).append(span1);
+				$('#is_imageOne').append(image1);
+
+				var span2 = document.createElement('span');
+				    span2.id = 'is_imageTwo';
+				    span2.style.position = 'absolute';
+				    span2.style.borderRight = '2px solid #FFF';
+				    span2.style.width = w/2 + 'px';
+				    span2.style.height = h + 'px';
+				    span2.style.top = '0';
+				    span2.style.left = '0';
+				    span2.style.overflow = 'hidden';
+				    span2.style.zIndex = '2';
+		    $(wrapper).append(span2);
+				$('#is_imageTwo').append(image2);
+
+				var slider = document.createElement('input')
+				    slider.id = 'slider';
+				    slider.name = 'slider';
+				    slider.type = 'range';
+				    slider.min = '0';
+				    slider.max = w;
+				    slider.value = w/2;
+				$('body').append(slider);
+
+				$('#slider').css('width', w);
+
+				$('#slider').change(function(){
+					$('#is_imageTwo').css('width', this.value);
+				});
+			}
+	});
+	</script>
+</body>
+</html>
