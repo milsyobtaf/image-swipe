@@ -4,26 +4,29 @@
 	<meta charset="utf-8">
 	<title>Image Swipe</title>
 	<style type="text/css" media="screen">
-		#theImageSwipe { position:relative; display:block; }
-		input[type=range] { }
+		.IS_control{
+			background:#EEE -webkit-gradient(linear, 0 0, 0 65%, from(#B8B8B8), to(#EEE)) no-repeat;
+			border-radius:5px;
+		}
+
+		.IS_control .IS_button{
+			-webkit-box-shadow: #777 0px 2px 3px;
+			-webkit-box-sizing: border-box;
+			border-radius:20px;
+			background: #EEE -webkit-gradient(linear, 0 0, 0 50%, from(#BFBFBF), to(#EEE)) no-repeat;
+		}
 	</style>
 </head>
 <body>
-	<div id="theImageSwipe"></div>
-
-	<!-- <div id="theImageSwipe">
-		<span id="is_imageOne">
-			<img src="eu.jpg" alt="eu um">
-		</span>
-		<span id="is_imageTwo">
-			<img src="http://a1.twimg.com/profile_images/1300039817/eu.jpg" alt="eu dois">
-		</span>
+	<div id="theImageSwipe">
 	</div>
-	<input type="range" name="slider" id="slider" min="0" max="300" value="150"> -->
 
+		
+	</div>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function(){
+
 			swipeThis('theImageSwipe', 970, 500, 'antes.jpg', 'depois.jpg');
 
 			function swipeThis(e, w, h, i1, i2){
@@ -33,6 +36,14 @@
 				    wrapper.style.width = w + 'px';
 				    wrapper.style.height = h + 'px';
 
+				var theWrapper = document.createElement('div');
+				    theWrapper.id = 'theRealWrapper';
+				    theWrapper.style.position = 'relative';
+				    theWrapper.style.display = 'block';
+				    theWrapper.style.width = w + 'px';
+				    theWrapper.style.height = h + 'px';
+				    $(wrapper).append(theWrapper);
+
 				var image1 = new Image();
 				    image1.src = i1;
 
@@ -40,7 +51,7 @@
 				    image2.src = i2;
 
 				var span1 = document.createElement('span');
-				    span1.id = 'is_imageOne';
+				    span1.id = 'IS_imageOne';
 				    span1.style.position = 'absolute';
 				    span1.style.width = w + 'px';
 				    span1.style.height = h + 'px';
@@ -48,11 +59,11 @@
 				    span1.style.left = '0';
 				    span1.style.overflow = 'hidden';
 				    span1.style.zIndex = '1';
-		    $(wrapper).append(span1);
-				$('#is_imageOne').append(image1);
+		    $(theWrapper).append(span1);
+				$('#IS_imageOne').append(image1);
 
 				var span2 = document.createElement('span');
-				    span2.id = 'is_imageTwo';
+				    span2.id = 'IS_imageTwo';
 				    span2.style.position = 'absolute';
 				    span2.style.borderRight = '2px solid #FFF';
 				    span2.style.width = w/2 + 'px';
@@ -61,23 +72,28 @@
 				    span2.style.left = '0';
 				    span2.style.overflow = 'hidden';
 				    span2.style.zIndex = '2';
-		    $(wrapper).append(span2);
-				$('#is_imageTwo').append(image2);
+		    $(theWrapper).append(span2);
+				$('#IS_imageTwo').append(image2);
 
-				var slider = document.createElement('input')
-				    slider.id = 'slider';
-				    slider.name = 'slider';
-				    slider.type = 'range';
-				    slider.min = '0';
-				    slider.max = w;
-				    slider.value = w/2;
-				$('body').append(slider);
+				var control = document.createElement('div');
+				    control.className = 'IS_control';
+				    control.style.position = 'relative';
+				    control.style.width = w + 'px';
+				    control.style.height = '10px';
+				    control.style.margin = '10px 0';
+				    control.style.border = '1px solid #CCC';
 
-				$('#slider').css('width', w);
+				var button = document.createElement('div');
+				    button.className = 'IS_button';
+				    button.style.position = 'absolute';
+				    button.style.left = w/2-10 + 'px'; // w/2 pra dar metade, -10px por ser metade do width do elemento (20px)
+				    button.style.zIndex = '3';
+				    button.style.width = '20px';
+				    button.style.height = '20px';
+				    button.style.marginTop = '-6px';
 
-				$('#slider').change(function(){
-					$('#is_imageTwo').css('width', this.value);
-				});
+				$(wrapper).append(control);
+				$('.IS_control').append(button);
 			}
 	});
 	</script>
