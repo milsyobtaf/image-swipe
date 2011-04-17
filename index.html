@@ -92,20 +92,22 @@
 
 				$(wrapper).append(control);
 				$('.IS_control').append(button);
-			}
 
-			// drag & drop
-			$('.IS_button').draggable({ 
-				axis: 'x',
-				handle: '.IS_control'
-			});
-			
-			$('.IS_button').draggable({
-				drag: function(){
-					var buttonPosition = $(this).position();
-					$('#IS_imageTwo').css('width', buttonPosition.left+10);
-				}
-			});
+				// drag & drop
+				$('.IS_button').draggable({ 
+					axis: 'x',
+					containment: [0, 0, w, 0],
+					handle: '.IS_control'
+				});
+
+				$('.IS_button').draggable({
+					drag: function(){
+						var buttonPosition = $(this).position();
+						$('#IS_imageTwo').css('width', buttonPosition.left+10);
+					}
+				});
+
+			}
 
 	});
 	</script>
