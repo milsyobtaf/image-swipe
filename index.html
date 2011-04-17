@@ -20,7 +20,8 @@
 <body>
 	<div id="theImageSwipe"></div>
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="jquery-1.5.1.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="jquery-ui-1.8.11.custom.min.js" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function(){
 
@@ -92,6 +93,20 @@
 				$(wrapper).append(control);
 				$('.IS_control').append(button);
 			}
+
+			// drag & drop
+			$('.IS_button').draggable({ 
+				axis: 'x',
+				handle: '.IS_control'
+			});
+			
+			$('.IS_button').draggable({
+				drag: function(){
+					var buttonPosition = $(this).position();
+					$('#IS_imageTwo').css('width', buttonPosition.left+10);
+				}
+			});
+
 	});
 	</script>
 </body>
