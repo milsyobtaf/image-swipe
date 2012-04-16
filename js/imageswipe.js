@@ -1,3 +1,10 @@
+/*
+ * Image Swipe
+ * A Javascript image comparsion
+ * Made by Daniel Filho - git.io/danielfilho
+ * Licenced under The MIT Licence - http://daniel.mit-license.org/
+ * 
+*/
 function swipeThis(e, w, h, i1, i2){
 	var wrapper = document.getElementById(e);
 	    wrapper.style.position = 'relative';
